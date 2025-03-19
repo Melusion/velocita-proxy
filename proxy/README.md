@@ -28,6 +28,7 @@ Velocita configures itself with the environment variables you pass.
 | ---------------------- | -------- | --------------------------------- | -------------------------------------- |
 | `VELOCITA_URL`         | No       | URL (default: `http://localhost`) | The URL at which Velocita is reachable |
 | `VELOCITA_TLS_ENABLED` | No       | One of: `true`, `false` (default) | Enable HTTPS                           |
+| `VELOCITA_IPV6_LISTEN` | No       | One of: `true` (default), `false` | Enable IPv6 listener                   |
 | `VELOCITA_AUTH_TYPE`   | No       | One of: `none` (default), `basic` | Enable HTTP authentication             |
 
 ## Configuring mirrors

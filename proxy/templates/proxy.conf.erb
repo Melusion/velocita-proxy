@@ -7,7 +7,7 @@ if velocita_url.end_with? '/'
     velocita_url = velocita_url.sub(/\/+$/, '')
 end
 tls_enabled = ENV['VELOCITA_TLS_ENABLED'] == 'true'
-ipv6_enabled = ENV['VELOCITA_IPV6_ENABLED'] == 'true'
+ipv6_listen = (ENV['VELOCITA_IPV6_LISTEN'] || 'true') == 'true'
 auth_type = ENV['VELOCITA_AUTH_TYPE'] || 'none'
 
 caches = {}
@@ -115,7 +115,7 @@ gzip_types application/json;
 
 server {
     listen 8080 default_server;
-<%- if ipv6_enabled -%>
+<%- if ipv6_listen -%>
     listen [::]:8080 default_server;
 <%- end -%>
     server_name _;
@@ -127,14 +127,15 @@ server {
 server {
 <%- if tls_enabled -%>
     listen 8443 ssl http2 default_server;
-<%- if ipv6_enabled -%>
+<%- if ipv6_listen -%>
     listen [::]:8443 ssl http2 default_server;
 <%- end -%>
+
     ssl_certificate /etc/nginx/server.crt;
     ssl_certificate_key /etc/nginx/server.key;
 <%- else -%>
     listen 8080 default_server;
-<%- if ipv6_enabled -%>
+<%- if ipv6_listen -%>
     listen [::]:8080 default_server;
 <%- end -%>
 <%- end -%>
